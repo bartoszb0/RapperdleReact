@@ -47,7 +47,7 @@ export default function Input({
 
   function selectRapper(selectedRapper: Rapper) {
     setInputValue("");
-    setSelectedRappers((prev) => [...prev, selectedRapper]);
+    setSelectedRappers((prev) => [selectedRapper, ...prev]);
   }
 
   return (

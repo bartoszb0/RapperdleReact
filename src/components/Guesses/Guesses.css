@@ -1,0 +1,20 @@
+.guessesContainer {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guessesTable thead th {
+  background-color: rgb(71, 71, 71);
+  width: 30px;
+  padding: 5px;
+}
+
+.tableName {
+  background-color: rgb(48, 48, 48);
+}
+
+.guessesTable tbody td {
+  padding: 10px;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import rappersArray from "../../../rappers/rappers.ts";
 import type { Rapper } from "../../../types/types";
+import Guesses from "../Guesses/Guesses";
 import Input from "../Input/Input";
 import "./App.css";
 
@@ -8,6 +9,7 @@ function App() {
   const [rappers] = useState(rappersArray);
   const [selectedRappers, setSelectedRappers] = useState<Rapper[]>([]);
   const todaysRapper = rappers[0]; // for now
+  const latestSelectedRapper = selectedRappers[0];
 
   return (
     <>
@@ -17,7 +19,7 @@ function App() {
         selectedRappers={selectedRappers}
         setSelectedRappers={setSelectedRappers}
       />
-      <div className="guessesContainer">guesses</div>
+      <Guesses selectedRappers={selectedRappers} todaysRapper={todaysRapper} />
     </>
   );
 }
