@@ -11,9 +11,15 @@ export default function Input({ rappers }: InputProps) {
   const [matches, setMatches] = useState<Rapper[]>([]);
 
   const matchesElement = matches.map((match) => {
-    return <li key={match.name}>{match.name}</li>;
+    return (
+      <div className="foundMatch" key={match.name}>
+        {match.name}
+      </div>
+    );
   });
 
+  // On every input change filter matching rappers,
+  // set matching rappers to none if there is no input
   useEffect(() => {
     if (!inputValue) {
       setMatches([]);
@@ -36,11 +42,9 @@ export default function Input({ rappers }: InputProps) {
             onChange={(e) => setInputValue(e.target.value)}
           ></input>
         </div>
-        {matchesElement.length > 0 && (
-          <div className="matchesContainer">
-            <ul>{matchesElement}</ul>
-          </div>
-        )}
+        <div className="matchesContainer">
+          {matches.length > 0 && <div>{matchesElement}</div>}
+        </div>
       </div>
     </>
   );

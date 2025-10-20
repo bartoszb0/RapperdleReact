@@ -30,7 +30,25 @@
 
 .matchesContainer {
   width: 320px;
-  background-color: black;
   position: absolute;
   top: 100%;
+}
+
+.foundMatch,
+.notFound {
+  font-size: 25px;
+  text-align: left;
+  list-style: none;
+  padding: 7px;
+  background-color: black;
+}
+
+.notFound {
+  font-size: 18px;
+  text-align: center;
+}
+
+.foundMatch:hover {
+  background-color: rgb(102, 102, 102);
+  cursor: pointer;
 }
