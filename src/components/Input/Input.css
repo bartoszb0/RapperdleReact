@@ -1,0 +1,36 @@
+.inputMatchesContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.inputContainer {
+  margin-top: 40px;
+}
+
+.inputContainer input {
+  height: 50px;
+  width: 300px;
+  font-family: "Cal Sans", Helvetica, Arial, sans-serif;
+  font-size: 27px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.inputContainer input:active {
+  background-color: aquamarine;
+}
+
+.inputContainer input:focus {
+  background-color: rgb(77, 77, 77);
+}
+
+.matchesContainer {
+  width: 320px;
+  background-color: black;
+  position: absolute;
+  top: 100%;
+}
