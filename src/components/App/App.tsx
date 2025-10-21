@@ -7,19 +7,25 @@ import "./App.css";
 
 function App() {
   const [rappers] = useState(rappersArray);
-  const [selectedRappers, setSelectedRappers] = useState<Rapper[]>([]);
+  const [guessedRappers, setGuessedRappers] = useState<Rapper[]>([]);
+  const [guessing, setGuessing] = useState(false);
   const todaysRapper = rappers[0]; // for now
-  const latestSelectedRapper = selectedRappers[0];
 
   return (
     <>
       <div className="logoContainer">Rapperdle</div>
       <Input
         rappers={rappers}
-        selectedRappers={selectedRappers}
-        setSelectedRappers={setSelectedRappers}
+        guessedRappers={guessedRappers}
+        setGuessedRappers={setGuessedRappers}
+        guessing={guessing}
+        setGuessing={setGuessing}
       />
-      <Guesses selectedRappers={selectedRappers} todaysRapper={todaysRapper} />
+      <Guesses
+        guessedRappers={guessedRappers}
+        todaysRapper={todaysRapper}
+        setGuessing={setGuessing}
+      />
     </>
   );
 }

@@ -11,8 +11,8 @@
 }
 
 .inputContainer input {
-  height: 50px;
-  width: 300px;
+  height: 40px;
+  width: 330px;
   font-family: "Cal Sans", Helvetica, Arial, sans-serif;
   font-size: 27px;
   padding: 10px;
@@ -20,16 +20,12 @@
   border-radius: 5px;
 }
 
-.inputContainer input:active {
-  background-color: aquamarine;
-}
-
 .inputContainer input:focus {
   background-color: rgb(77, 77, 77);
 }
 
 .matchesContainer {
-  width: 320px;
+  width: 350px;
   position: absolute;
   top: 100%;
 }

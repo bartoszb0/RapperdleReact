@@ -1,13 +1,19 @@
+import { useEffect } from "react";
 import type { Rapper } from "../../../types/types";
 import "./Guesses.css";
 
 type GuessesProps = {
-  selectedRappers: Rapper[];
+  guessedRappers: Rapper[];
   todaysRapper: Rapper;
+  setGuessing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Guesses({ selectedRappers }: GuessesProps) {
-  const guessedRappersElement = selectedRappers.map((rapper) => {
+export default function Guesses({
+  guessedRappers,
+  todaysRapper,
+  setGuessing,
+}: GuessesProps) {
+  const guessedRappersElement = guessedRappers.map((rapper) => {
     return (
       <tr key={rapper.name}>
         <td className="tableName">{rapper.name}</td>
@@ -19,6 +25,19 @@ export default function Guesses({ selectedRappers }: GuessesProps) {
       </tr>
     );
   });
+
+  // compare guessed rapper and render ui based off it
+  useEffect(() => {
+    if (guessedRappers.length <= 0) return;
+
+    const guessedRapper = guessedRappers[0];
+
+    if (guessedRapper.age === todaysRapper.age) {
+      console.log(guessedRapper);
+    }
+
+    setGuessing(false);
+  }, [guessedRappers]);
 
   return (
     <div className="guessesContainer">

@@ -4,14 +4,18 @@ import "./Input.css";
 
 type InputProps = {
   rappers: Rapper[];
-  selectedRappers: Rapper[];
-  setSelectedRappers: React.Dispatch<React.SetStateAction<Rapper[]>>;
+  guessedRappers: Rapper[];
+  setGuessedRappers: React.Dispatch<React.SetStateAction<Rapper[]>>;
+  guessing: boolean;
+  setGuessing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Input({
   rappers,
-  selectedRappers,
-  setSelectedRappers,
+  guessedRappers,
+  setGuessedRappers,
+  guessing,
+  setGuessing,
 }: InputProps) {
   const [inputValue, setInputValue] = useState("");
   const [matches, setMatches] = useState<Rapper[]>([]);
@@ -38,7 +42,7 @@ export default function Input({
 
     const matches = rappers.filter(
       (rapper) =>
-        !selectedRappers.includes(rapper) &&
+        !guessedRappers.includes(rapper) &&
         rapper.name.toLowerCase().startsWith(inputValue.toLowerCase())
     );
 
@@ -47,7 +51,8 @@ export default function Input({
 
   function selectRapper(selectedRapper: Rapper) {
     setInputValue("");
-    setSelectedRappers((prev) => [selectedRapper, ...prev]);
+    setGuessing(true);
+    setGuessedRappers((prev) => [selectedRapper, ...prev]);
   }
 
   return (
@@ -58,6 +63,7 @@ export default function Input({
             placeholder="Enter rapper's name..."
             onChange={(e) => setInputValue(e.target.value)}
             value={inputValue}
+            disabled={guessing}
           ></input>
         </div>
         <div className="matchesContainer">
