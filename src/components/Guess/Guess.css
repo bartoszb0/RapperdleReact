@@ -1,9 +1,12 @@
-.correct {
+.correct,
+.perfect {
   background-color: green;
 }
 
-.incorrect {
-  background-color: red;
+.incorrect,
+.smaller,
+.bigger {
+  background-color: rgb(170, 44, 44);
 }
 
 .almostCorrect {

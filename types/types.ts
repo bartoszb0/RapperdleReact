@@ -6,3 +6,10 @@ export type Rapper = {
   monthly: string;
   debut: number;
 };
+
+export type GuessType = {
+  rapper: Rapper;
+  ageComparison: "smaller" | "perfect" | "bigger";
+  debutComparison: "smaller" | "perfect" | "bigger";
+  monthlyComparison: "smaller" | "perfect" | "bigger";
+};
