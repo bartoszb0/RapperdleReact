@@ -11,6 +11,9 @@ function App() {
   const [guessing, setGuessing] = useState(false);
   const todaysRapper = rappers[0]; // for now
 
+  // probably should add here input ref to pass it
+  // down to Guesses so its possible to focus on it after guessing
+
   return (
     <>
       <div className="logoContainer">Rapperdle</div>

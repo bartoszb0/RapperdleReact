@@ -55,16 +55,25 @@ export default function Input({
     setGuessedRappers((prev) => [selectedRapper, ...prev]);
   }
 
+  // when user presses Enter when typing rapper's name
+  function keyboardSelectRapper(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (matches.length <= 0) return;
+    selectRapper(matches[0]);
+  }
+
   return (
     <>
       <div className="inputMatchesContainer">
         <div className="inputContainer">
-          <input
-            placeholder="Enter rapper's name..."
-            onChange={(e) => setInputValue(e.target.value)}
-            value={inputValue}
-            disabled={guessing}
-          ></input>
+          <form onSubmit={(e) => keyboardSelectRapper(e)}>
+            <input
+              placeholder="Enter rapper's name..."
+              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue}
+              disabled={guessing}
+            ></input>
+          </form>
         </div>
         <div className="matchesContainer">
           {matches.length > 0 && <div>{matchesElement}</div>}
