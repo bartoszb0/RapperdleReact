@@ -8,6 +8,7 @@ type InputProps = {
   setGuessedRappers: React.Dispatch<React.SetStateAction<Rapper[]>>;
   guessing: boolean;
   setGuessing: React.Dispatch<React.SetStateAction<boolean>>;
+  gameWon: boolean;
 };
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
   setGuessedRappers,
   guessing,
   setGuessing,
+  gameWon,
 }: InputProps) {
   const [inputValue, setInputValue] = useState("");
   const [matches, setMatches] = useState<Rapper[]>([]);
@@ -71,7 +73,7 @@ export default function Input({
               placeholder="Enter rapper's name..."
               onChange={(e) => setInputValue(e.target.value)}
               value={inputValue}
-              disabled={guessing}
+              disabled={guessing || gameWon}
             ></input>
           </form>
         </div>
