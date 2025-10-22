@@ -25,8 +25,6 @@ export function compareGenre(guessedRapper: Rapper, todaysRapper: Rapper) {
     todaysRapper.genre.includes(eachGenre)
   );
 
-  console.log(guessedRapper.genre.length, todaysRapper.genre.length);
-
   if (matchingGenres.length === 0) {
     return "incorrect";
   }

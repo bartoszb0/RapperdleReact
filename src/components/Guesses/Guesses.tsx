@@ -13,12 +13,14 @@ type GuessesProps = {
   guessedRappers: Rapper[];
   todaysRapper: Rapper;
   setGuessing: React.Dispatch<React.SetStateAction<boolean>>;
+  setGameWon: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Guesses({
   guessedRappers,
   todaysRapper,
   setGuessing,
+  setGameWon,
 }: GuessesProps) {
   const [displayedGuesses, setDisplayedGuesses] = useState<GuessType[]>([]);
 
@@ -32,6 +34,8 @@ export default function Guesses({
       debutComparison={guess.debutComparison}
       monthlyComparison={guess.monthlyComparison}
       setGuessing={setGuessing}
+      setGameWon={setGameWon}
+      todaysRapper={todaysRapper}
     />
   ));
 
