@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import type { GuessType, Rapper } from "../../../types/types";
 import Guess from "../Guess/Guess";
+import {
+  compareFrom,
+  compareGenre,
+  compareMonthly,
+  compareNumbers,
+} from "./compareFunctions";
 import "./Guesses.css";
 
 type GuessesProps = {
@@ -28,70 +34,6 @@ export default function Guesses({
     />
   ));
 
-  // TODO make number functions in the same one and add flag
-  function compareAge(guessedRapper: Rapper) {
-    if (guessedRapper.age < todaysRapper.age) {
-      return "bigger";
-    } else if (guessedRapper.age > todaysRapper.age) {
-      return "smaller";
-    } else {
-      return "perfect";
-    }
-  }
-
-  function compareDebut(guessedRapper: Rapper) {
-    if (guessedRapper.debut < todaysRapper.debut) {
-      return "bigger";
-    } else if (guessedRapper.debut > todaysRapper.debut) {
-      return "smaller";
-    } else {
-      return "perfect";
-    }
-  }
-
-  function compareMonthly(guessedRapper: Rapper) {
-    const guessedRaperMonthly = Number(guessedRapper.monthly.replace("M+", ""));
-    const todaysRapperMonthly = Number(todaysRapper.monthly.replace("M+", ""));
-
-    if (guessedRaperMonthly < todaysRapperMonthly) {
-      return "bigger";
-    } else if (guessedRaperMonthly > todaysRapperMonthly) {
-      return "smaller";
-    } else {
-      return "perfect";
-    }
-  }
-
-  function compareGenre(guessedRapper: Rapper) {
-    // jezeli nic sie nie zgadza to return incorrect
-    const matchingGenres = guessedRapper.genre.filter((eachGenre) =>
-      todaysRapper.genre.includes(eachGenre)
-    );
-
-    console.log(guessedRapper.genre.length, todaysRapper.genre.length);
-
-    if (matchingGenres.length === 0) {
-      return "incorrect";
-    }
-
-    if (
-      matchingGenres.length === todaysRapper.genre.length &&
-      guessedRapper.genre.length === todaysRapper.genre.length
-    ) {
-      return "correct";
-    }
-
-    return "almostCorrect";
-  }
-
-  function compareFrom(guessedRapper: Rapper) {
-    if (guessedRapper.from == todaysRapper.from) {
-      return "correct";
-    } else {
-      return "incorrect";
-    }
-  }
-
   // compare guessed rapper and render ui based off it
   useEffect(() => {
     if (guessedRappers.length <= 0) return;
@@ -100,11 +42,11 @@ export default function Guesses({
 
     const guess: GuessType = {
       rapper: rapper,
-      ageComparison: compareAge(rapper),
-      genreComparison: compareGenre(rapper),
-      fromComparison: compareFrom(rapper),
-      monthlyComparison: compareMonthly(rapper),
-      debutComparison: compareDebut(rapper),
+      ageComparison: compareNumbers(rapper.age, todaysRapper.age),
+      genreComparison: compareGenre(rapper, todaysRapper),
+      fromComparison: compareFrom(rapper, todaysRapper),
+      monthlyComparison: compareMonthly(rapper, todaysRapper),
+      debutComparison: compareNumbers(rapper.debut, todaysRapper.debut),
     };
 
     setDisplayedGuesses((prev) => [guess, ...prev]);
