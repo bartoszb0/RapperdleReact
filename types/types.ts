@@ -10,6 +10,8 @@ export type Rapper = {
 export type GuessType = {
   rapper: Rapper;
   ageComparison: "smaller" | "perfect" | "bigger";
+  genreComparison: "correct" | "almostCorrect" | "incorrect";
+  fromComparison: "correct" | "incorrect";
   debutComparison: "smaller" | "perfect" | "bigger";
   monthlyComparison: "smaller" | "perfect" | "bigger";
 };
