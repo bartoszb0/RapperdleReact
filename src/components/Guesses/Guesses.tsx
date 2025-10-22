@@ -31,6 +31,7 @@ export default function Guesses({
       fromComparison={guess.fromComparison}
       debutComparison={guess.debutComparison}
       monthlyComparison={guess.monthlyComparison}
+      setGuessing={setGuessing}
     />
   ));
 
@@ -50,7 +51,6 @@ export default function Guesses({
     };
 
     setDisplayedGuesses((prev) => [guess, ...prev]);
-    setGuessing(false);
   }, [guessedRappers]);
 
   return (
