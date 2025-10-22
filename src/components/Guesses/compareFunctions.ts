@@ -1,6 +1,5 @@
 import type { Rapper } from "../../../types/types";
 
-// TODO make number functions in the same one and add flag
 export function compareNumbers(
   guessedRapperValue: number,
   todaysRapperValue: number
