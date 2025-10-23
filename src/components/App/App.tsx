@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import rappersArray from "../../../rappers/rappers.ts";
-import type { Rapper } from "../../../types/types";
+import type { GuessType, Rapper } from "../../../types/types";
+import {
+  compareFrom,
+  compareGenre,
+  compareMonthly,
+  compareNumbers,
+} from "../Guesses/compareFunctions";
 import Guesses from "../Guesses/Guesses";
 import Input from "../Input/Input";
 import WinScreen from "../WinScreen/WinScreen";
@@ -8,19 +14,21 @@ import "./App.css";
 
 function App() {
   const [rappers] = useState(rappersArray);
-  const [guessedRappers, setGuessedRappers] = useState<Rapper[]>(() => {
-    const guessedRappers = localStorage.getItem("guessedRappers");
-    return guessedRappers ? JSON.parse(guessedRappers) : [];
-  });
   const [guessing, setGuessing] = useState(false);
   const todaysRapper = rappers[1]; // for now
+
+  const [guessedRappers, setGuessedRappers] = useState<Rapper[]>(() => {
+    const storedGuessedRappers = localStorage.getItem("guessedRappers");
+    return storedGuessedRappers ? JSON.parse(storedGuessedRappers) : [];
+  });
   const [gameWon, setGameWon] = useState<boolean>(() => {
     const storedGameWon = localStorage.getItem("gameWon");
     return storedGameWon ? JSON.parse(storedGameWon) : false;
   });
-
-  // probably should add here input ref to pass it
-  // down to Guesses so its possible to focus on it after guessing
+  const [displayedGuesses, setDisplayedGuesses] = useState<GuessType[]>(() => {
+    const storedDisplayedGuesses = localStorage.getItem("displayedGuesses");
+    return storedDisplayedGuesses ? JSON.parse(storedDisplayedGuesses) : [];
+  });
 
   // Reset localStorage everyday
   useEffect(() => {
@@ -37,9 +45,22 @@ function App() {
 
   // LocalStorage implementation
   useEffect(() => {
+    localStorage.setItem("displayedGuesses", JSON.stringify(displayedGuesses));
     localStorage.setItem("gameWon", JSON.stringify(gameWon));
     localStorage.setItem("guessedRappers", JSON.stringify(guessedRappers));
-  }, [guessedRappers, gameWon]);
+  }, [guessedRappers, gameWon, displayedGuesses]);
+
+  function addNewGuess(rapper: Rapper) {
+    const guess: GuessType = {
+      rapper: rapper,
+      ageComparison: compareNumbers(rapper.age, todaysRapper.age),
+      genreComparison: compareGenre(rapper, todaysRapper),
+      fromComparison: compareFrom(rapper, todaysRapper),
+      monthlyComparison: compareMonthly(rapper, todaysRapper),
+      debutComparison: compareNumbers(rapper.debut, todaysRapper.debut),
+    };
+    setDisplayedGuesses((prev) => [guess, ...prev]);
+  }
 
   return (
     <>
@@ -52,12 +73,13 @@ function App() {
         guessing={guessing}
         setGuessing={setGuessing}
         gameWon={gameWon}
+        addNewGuess={addNewGuess}
       />
       <Guesses
-        guessedRappers={guessedRappers}
-        todaysRapper={todaysRapper}
+        displayedGuesses={displayedGuesses}
         setGuessing={setGuessing}
         setGameWon={setGameWon}
+        todaysRapper={todaysRapper}
       />
     </>
   );

@@ -9,6 +9,7 @@ type InputProps = {
   guessing: boolean;
   setGuessing: React.Dispatch<React.SetStateAction<boolean>>;
   gameWon: boolean;
+  addNewGuess: (rapper: Rapper) => void;
 };
 
 export default function Input({
@@ -18,6 +19,7 @@ export default function Input({
   guessing,
   setGuessing,
   gameWon,
+  addNewGuess,
 }: InputProps) {
   const [inputValue, setInputValue] = useState("");
   const [matches, setMatches] = useState<Rapper[]>([]);
@@ -54,7 +56,8 @@ export default function Input({
   function selectRapper(selectedRapper: Rapper) {
     setInputValue("");
     setGuessing(true);
-    setGuessedRappers((prev) => [selectedRapper, ...prev]);
+    setGuessedRappers((prev) => [...prev, selectedRapper]);
+    addNewGuess(selectedRapper);
   }
 
   // when user presses Enter when typing rapper's name

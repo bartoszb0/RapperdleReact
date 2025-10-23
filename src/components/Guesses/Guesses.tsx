@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react";
 import type { GuessType, Rapper } from "../../../types/types";
 import Guess from "../Guess/Guess";
-import {
-  compareFrom,
-  compareGenre,
-  compareMonthly,
-  compareNumbers,
-} from "./compareFunctions";
 import "./Guesses.css";
 
 type GuessesProps = {
-  guessedRappers: Rapper[];
-  todaysRapper: Rapper;
+  displayedGuesses: GuessType[];
   setGuessing: React.Dispatch<React.SetStateAction<boolean>>;
   setGameWon: React.Dispatch<React.SetStateAction<boolean>>;
+  todaysRapper: Rapper;
 };
 
 export default function Guesses({
-  guessedRappers,
-  todaysRapper,
+  displayedGuesses,
   setGuessing,
   setGameWon,
+  todaysRapper,
 }: GuessesProps) {
-  const [displayedGuesses, setDisplayedGuesses] = useState<GuessType[]>([]);
-
   const guessedRappersElement = displayedGuesses.map((guess) => (
     <Guess
       key={guess.rapper.name}
@@ -38,24 +29,6 @@ export default function Guesses({
       todaysRapper={todaysRapper}
     />
   ));
-
-  // compare guessed rapper and render ui based off it
-  useEffect(() => {
-    if (guessedRappers.length <= 0) return;
-
-    const rapper = guessedRappers[0];
-
-    const guess: GuessType = {
-      rapper: rapper,
-      ageComparison: compareNumbers(rapper.age, todaysRapper.age),
-      genreComparison: compareGenre(rapper, todaysRapper),
-      fromComparison: compareFrom(rapper, todaysRapper),
-      monthlyComparison: compareMonthly(rapper, todaysRapper),
-      debutComparison: compareNumbers(rapper.debut, todaysRapper.debut),
-    };
-
-    setDisplayedGuesses((prev) => [guess, ...prev]);
-  }, [guessedRappers]);
 
   return (
     <div className="guessesContainer">
