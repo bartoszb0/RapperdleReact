@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
-import type { Rapper } from "../../../types/types";
+import type { GuessType, Rapper } from "../../../types/types";
 import "./Input.css";
 
 type InputProps = {
   rappers: Rapper[];
-  guessedRappers: Rapper[];
-  setGuessedRappers: React.Dispatch<React.SetStateAction<Rapper[]>>;
   guessing: boolean;
   setGuessing: React.Dispatch<React.SetStateAction<boolean>>;
   gameWon: boolean;
   addNewGuess: (rapper: Rapper) => void;
+  displayedGuesses: GuessType[];
 };
 
 export default function Input({
   rappers,
-  guessedRappers,
-  setGuessedRappers,
   guessing,
   setGuessing,
   gameWon,
   addNewGuess,
+  displayedGuesses,
 }: InputProps) {
   const [inputValue, setInputValue] = useState("");
   const [matches, setMatches] = useState<Rapper[]>([]);
@@ -46,7 +44,7 @@ export default function Input({
 
     const matches = rappers.filter(
       (rapper) =>
-        !guessedRappers.includes(rapper) &&
+        !displayedGuesses.some((guess) => guess.rapper.name === rapper.name) &&
         rapper.name.toLowerCase().startsWith(inputValue.toLowerCase())
     );
 
@@ -56,7 +54,6 @@ export default function Input({
   function selectRapper(selectedRapper: Rapper) {
     setInputValue("");
     setGuessing(true);
-    setGuessedRappers((prev) => [...prev, selectedRapper]);
     addNewGuess(selectedRapper);
   }
 

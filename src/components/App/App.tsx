@@ -15,12 +15,8 @@ import "./App.css";
 function App() {
   const [rappers] = useState(rappersArray);
   const [guessing, setGuessing] = useState(false);
-  const todaysRapper = rappers[1]; // for now
+  const todaysRapper = rappers[47]; // for now
 
-  const [guessedRappers, setGuessedRappers] = useState<Rapper[]>(() => {
-    const storedGuessedRappers = localStorage.getItem("guessedRappers");
-    return storedGuessedRappers ? JSON.parse(storedGuessedRappers) : [];
-  });
   const [gameWon, setGameWon] = useState<boolean>(() => {
     const storedGameWon = localStorage.getItem("gameWon");
     return storedGameWon ? JSON.parse(storedGameWon) : false;
@@ -39,7 +35,7 @@ function App() {
       localStorage.clear();
       localStorage.setItem("lastResetDate", today);
       setGameWon(false);
-      setGuessedRappers([]);
+      setDisplayedGuesses([]);
     }
   }, []);
 
@@ -47,8 +43,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("displayedGuesses", JSON.stringify(displayedGuesses));
     localStorage.setItem("gameWon", JSON.stringify(gameWon));
-    localStorage.setItem("guessedRappers", JSON.stringify(guessedRappers));
-  }, [guessedRappers, gameWon, displayedGuesses]);
+  }, [gameWon, displayedGuesses]);
 
   function addNewGuess(rapper: Rapper) {
     const guess: GuessType = {
@@ -68,12 +63,11 @@ function App() {
       {gameWon && <WinScreen />}
       <Input
         rappers={rappers}
-        guessedRappers={guessedRappers}
-        setGuessedRappers={setGuessedRappers}
         guessing={guessing}
         setGuessing={setGuessing}
         gameWon={gameWon}
         addNewGuess={addNewGuess}
+        displayedGuesses={displayedGuesses}
       />
       <Guesses
         displayedGuesses={displayedGuesses}
