@@ -15,7 +15,7 @@ import "./App.css";
 function App() {
   const [rappers] = useState(rappersArray);
   const [guessing, setGuessing] = useState(false);
-  const todaysRapper = rappers[47]; // for now
+  const todaysRapper = rappers[1]; // for now
 
   const [gameWon, setGameWon] = useState<boolean>(() => {
     const storedGameWon = localStorage.getItem("gameWon");
@@ -60,15 +60,18 @@ function App() {
   return (
     <>
       <div className="logoContainer">Rapperdle</div>
-      {gameWon && <WinScreen />}
-      <Input
-        rappers={rappers}
-        guessing={guessing}
-        setGuessing={setGuessing}
-        gameWon={gameWon}
-        addNewGuess={addNewGuess}
-        displayedGuesses={displayedGuesses}
-      />
+      {gameWon ? (
+        <WinScreen guessesCount={displayedGuesses.length} />
+      ) : (
+        <Input
+          rappers={rappers}
+          guessing={guessing}
+          setGuessing={setGuessing}
+          gameWon={gameWon}
+          addNewGuess={addNewGuess}
+          displayedGuesses={displayedGuesses}
+        />
+      )}
       <Guesses
         displayedGuesses={displayedGuesses}
         setGuessing={setGuessing}

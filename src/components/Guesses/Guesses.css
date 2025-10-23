@@ -5,13 +5,24 @@
   justify-content: center;
 }
 
-.guessesTable thead th {
-  background-color: rgb(71, 71, 71);
-  width: 30px;
-  padding: 5px;
+.guessesTable {
+  width: 80%;
 }
 
-.tableName {
+.guessesTable thead tr th {
+  background-color: rgb(71, 71, 71);
+  width: 100px;
+  padding: 5px;
+  font-size: 18px;
+}
+
+.guessesTable tbody td {
+  width: 100px;
+  height: 70px;
+  font-size: 25px;
+}
+
+.guessesTable .tableName {
   background-color: rgb(48, 48, 48);
 }
 
