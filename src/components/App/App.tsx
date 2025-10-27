@@ -17,10 +17,12 @@ function App() {
   const [rappers] = useState(rappersArray);
   const [guessing, setGuessing] = useState(() => {
     const storedDisplayedGuesses = localStorage.getItem("displayedGuesses");
-    return storedDisplayedGuesses ? true : false;
+    if (!storedDisplayedGuesses) return false;
+
+    const parsedGuesses = JSON.parse(storedDisplayedGuesses);
+    return Array.isArray(parsedGuesses) && parsedGuesses.length > 0;
   });
   const todaysRapper = getTodaysRapper(rappers);
-  console.log(todaysRapper);
 
   const [gameWon, setGameWon] = useState<boolean>(() => {
     const storedGameWon = localStorage.getItem("gameWon");
