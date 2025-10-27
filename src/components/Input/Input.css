@@ -56,6 +56,7 @@
 
   .inputContainer input {
     width: 280px;
+    background-color: rgb(77, 77, 77);
   }
 
   .matchesContainer {
