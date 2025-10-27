@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import rappersArray from "../../../rappers/rappers.ts";
-import type { GuessType, Rapper } from "../../../types/types";
+import type { GuessType, Rapper } from "../../types/types.ts";
+import { getTodaysRapper } from "../../utils/getTodaysRapper";
 import {
   compareFrom,
   compareGenre,
@@ -14,8 +15,12 @@ import "./App.css";
 
 function App() {
   const [rappers] = useState(rappersArray);
-  const [guessing, setGuessing] = useState(false);
-  const todaysRapper = rappers[1]; // for now
+  const [guessing, setGuessing] = useState(() => {
+    const storedDisplayedGuesses = localStorage.getItem("displayedGuesses");
+    return storedDisplayedGuesses ? true : false;
+  });
+  const todaysRapper = getTodaysRapper(rappers);
+  console.log(todaysRapper);
 
   const [gameWon, setGameWon] = useState<boolean>(() => {
     const storedGameWon = localStorage.getItem("gameWon");
@@ -33,9 +38,9 @@ function App() {
 
     if (lastReset !== today) {
       localStorage.clear();
-      localStorage.setItem("lastResetDate", today);
       setGameWon(false);
       setDisplayedGuesses([]);
+      localStorage.setItem("lastResetDate", today);
     }
   }, []);
 

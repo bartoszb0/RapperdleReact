@@ -1,4 +1,4 @@
-import type { Rapper } from "../../../types/types";
+import type { Rapper } from "../../types/types";
 
 export function compareNumbers(
   guessedRapperValue: number,

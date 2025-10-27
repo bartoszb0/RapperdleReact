@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import type { GuessType, Rapper } from "../../../types/types";
+import type { GuessType, Rapper } from "../../types/types";
 import "./Guess.css";
 
 type GuessProps = GuessType & {

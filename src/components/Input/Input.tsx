@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { GuessType, Rapper } from "../../../types/types";
+import type { GuessType, Rapper } from "../../types/types";
 import "./Input.css";
 
 type InputProps = {

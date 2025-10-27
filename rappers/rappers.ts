@@ -1,4 +1,4 @@
-import type { Rapper } from "../types/types";
+import type { Rapper } from "../src/types/types";
 
 function calculateAge(
   birthYear: number,

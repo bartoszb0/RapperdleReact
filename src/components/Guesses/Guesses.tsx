@@ -1,4 +1,4 @@
-import type { GuessType, Rapper } from "../../../types/types";
+import type { GuessType, Rapper } from "../../types/types";
 import Guess from "../Guess/Guess";
 import "./Guesses.css";
 
