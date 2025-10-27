@@ -21,6 +21,7 @@ export default function Input({
 }: InputProps) {
   const [inputValue, setInputValue] = useState("");
   const [matches, setMatches] = useState<Rapper[]>([]);
+  const [rapperNotFound, setRapperNotFound] = useState(false);
 
   const matchesElement = matches.map((match) => {
     return (
@@ -39,6 +40,7 @@ export default function Input({
   useEffect(() => {
     if (!inputValue) {
       setMatches([]);
+      setRapperNotFound(false);
       return;
     }
 
@@ -47,6 +49,10 @@ export default function Input({
         !displayedGuesses.some((guess) => guess.rapper.name === rapper.name) &&
         rapper.name.toLowerCase().startsWith(inputValue.toLowerCase())
     );
+
+    if (matches.length <= 0) {
+      setRapperNotFound(true);
+    }
 
     setMatches(matches);
   }, [inputValue]);
@@ -79,6 +85,7 @@ export default function Input({
         </div>
         <div className="matchesContainer">
           {matches.length > 0 && <div>{matchesElement}</div>}
+          {rapperNotFound && <div className="notFound">Rapper not found</div>}
         </div>
       </div>
     </>
