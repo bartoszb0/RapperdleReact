@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import rappersArray from "../../../rappers/rappers.ts";
 import type { GuessType, Rapper } from "../../types/types.ts";
-import { getTodaysRapper } from "../../utils/getTodaysRapper";
 import {
   compareFrom,
   compareGenre,
   compareMonthly,
   compareNumbers,
-} from "../Guesses/compareFunctions";
+} from "../../utils/compareFunctions.ts";
+import { getTodaysRapper } from "../../utils/getTodaysRapper";
 import Guesses from "../Guesses/Guesses";
 import Input from "../Input/Input";
 import WinScreen from "../WinScreen/WinScreen";

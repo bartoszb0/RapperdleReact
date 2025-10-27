@@ -2,3 +2,9 @@
   font-size: 100px;
   font-weight: 600;
 }
+
+@media (max-width: 640px) {
+  .logoContainer {
+    font-size: 60px;
+  }
+}

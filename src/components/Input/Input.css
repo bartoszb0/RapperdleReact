@@ -48,3 +48,18 @@
   background-color: rgb(102, 102, 102);
   cursor: pointer;
 }
+
+@media (max-width: 600px) {
+  .inputContainer {
+    margin-top: 15px;
+  }
+
+  .inputContainer input {
+    width: 280px;
+  }
+
+  .matchesContainer {
+    width: 300px;
+    background-color: black;
+  }
+}

@@ -1,12 +1,12 @@
 .guessesContainer {
   margin-top: 30px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 }
 
 .guessesTable {
   width: 80%;
+  min-width: 600px;
 }
 
 .guessesTable thead tr th {
@@ -28,4 +28,31 @@
 
 .guessesTable tbody td {
   padding: 10px;
+}
+
+@media (max-width: 640px) {
+  .guessesContainer {
+    overflow-x: auto;
+  }
+
+  .guessesTable {
+    min-width: 500px;
+  }
+
+  .guessesTable thead tr th {
+    font-size: 14px;
+    padding: 4px;
+  }
+
+  .guessesTable tbody td {
+    font-size: 18px;
+    height: 60px;
+    padding: 6px;
+  }
+}
+
+@media (min-width: 640px) {
+  .guessesContainer {
+    justify-content: center;
+  }
 }
