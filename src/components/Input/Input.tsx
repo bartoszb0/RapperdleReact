@@ -50,9 +50,7 @@ export default function Input({
         rapper.name.toLowerCase().startsWith(inputValue.toLowerCase())
     );
 
-    if (matches.length <= 0) {
-      setRapperNotFound(true);
-    }
+    setRapperNotFound(matches.length <= 0);
 
     setMatches(matches);
   }, [inputValue]);
